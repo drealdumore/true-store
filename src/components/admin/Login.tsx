@@ -18,7 +18,7 @@ import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
   return (
-    <div className="bg-black min-h-screen grid place-items-center">
+    <div className=" min-h-screen grid place-items-center">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>

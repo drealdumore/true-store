@@ -1,19 +1,42 @@
 "use client";
 
+import Loader from "@/components/admin/Loader";
 import LoginPage from "@/components/admin/Login";
+import Navbar from "@/components/admin/Navbar";
+import Sidebar from "@/components/admin/Sidebar";
 import { useAppSelector } from "@/redux/hooks";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { ReactNode, useEffect } from "react";
 
-const Layout = () => {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const isLoading = useAppSelector((store) => store.loadingReducer);
-  const {data: session} = useSession()
+  const { data: session } = useSession();
 
-  if(!session?.user) {
-    return <LoginPage/>;
-  }
+  useEffect(() => {
+    console.log("Redux loading state:", isLoading);
+  }, [isLoading]);
 
-  return <div>Layout</div>;
+  // if (!session?.user) {
+  //   return <LoginPage />;
+  // }
+
+  return (
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <Sidebar />
+
+      <div className="w-full h-full flex flex-col">
+        <Navbar />
+
+        <div className="bg-gray-200 p-4 h-[calc(100vh-64px)] overflow-y-scroll">{children}</div>
+        {/* <div className="bg-gray-200 p-4 h-[calc(100vh-64px)]">{children}</div> */}
+      </div>
+      {isLoading && <Loader />}
+    </div>
+  );
 };
 
 export default Layout;
