@@ -1,25 +1,8 @@
 import Link from "next/link";
-import {
-  CircleUser,
-  Home,
-  LineChart,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users,
-} from "lucide-react";
+import { CircleUser, Menu, Search, Package, Package2 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,11 +14,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import menus from "@/interfaces/navInterface";
-import React from "react";
+import React, { FormEvent } from "react";
 import { usePathname } from "next/navigation";
+import { useSearch } from "@/context/searchContext";
 
 const Navbar = () => {
   const pathName = usePathname();
+  const { searchTerm, setSearchTerm } = useSearch();
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    // The search term is automatically updated in the context
+    e.preventDefault();
+  };
+
   return (
     <>
       <header className="sticky top-0 flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 backdrop-blur-xs">
@@ -106,10 +97,12 @@ const Navbar = () => {
         </Sheet>
 
         <div className="w-full flex-1">
-          <form>
+          <form onSubmit={handleSearch}>
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 type="search"
                 placeholder="Search products..."
                 className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
@@ -117,7 +110,7 @@ const Navbar = () => {
             </div>
           </form>
         </div>
-        
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">

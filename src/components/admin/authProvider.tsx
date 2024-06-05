@@ -1,4 +1,5 @@
 "use client";
+import { SearchProvider } from "@/context/searchContext";
 import { SessionProvider } from "next-auth/react";
 import React, { ReactNode } from "react";
 
@@ -7,7 +8,11 @@ interface PropType {
 }
 
 const authProvider = ({ children }: PropType) => {
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <SessionProvider>
+      <SearchProvider>{children}</SearchProvider>
+    </SessionProvider>
+  );
 };
 
 export default authProvider;

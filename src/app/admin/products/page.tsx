@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +20,8 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import Layout from "../Layout";
-import { JSX, SVGProps } from "react";
+import { useState, useMemo, SVGProps } from "react";
+import { useSearch } from "@/context/searchContext";
 
 export default function Component() {
   const products = [
@@ -59,6 +62,14 @@ export default function Component() {
     },
   ];
 
+  const { searchTerm } = useSearch();
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [products, searchTerm]);
+
   return (
     <Layout>
       <div className="flex min-h-screen w-full flex-col">
@@ -82,7 +93,7 @@ export default function Component() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <TableRow key={product.id}>
                     <TableCell className="font-medium">
                       {product.name}
