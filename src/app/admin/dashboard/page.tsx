@@ -23,16 +23,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
   Table,
   TableBody,
   TableCell,
@@ -46,9 +36,13 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className="flex min-h-screen w-full flex-col">
+        <div className="flex items-center">
+          <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
+        </div>
+
         <main className="flex flex-1 flex-col gap-4 md:gap-8 md:p-8">
           <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-            <Card >
+            <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Total Revenue
@@ -62,7 +56,7 @@ const Dashboard = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card >
+            <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Subscriptions
@@ -76,7 +70,7 @@ const Dashboard = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card >
+            <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Sales</CardTitle>
                 <CreditCard className="h-4 w-4 text-muted-foreground" />
@@ -88,7 +82,7 @@ const Dashboard = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card >
+            <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Active Now
@@ -104,9 +98,9 @@ const Dashboard = () => {
             </Card>
           </div>
           <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-2">
-          {/* <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3"> */}
+            {/* <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3"> */}
             {/* <Card className="xl:col-span-2" > */}
-            <Card  >
+            <Card>
               <CardHeader className="flex flex-row items-center">
                 <div className="grid gap-2">
                   <CardTitle>Transactions</CardTitle>
@@ -243,7 +237,7 @@ const Dashboard = () => {
                 </Table>
               </CardContent>
             </Card>
-            <Card >
+            <Card>
               <CardHeader>
                 <CardTitle>Recent Sales</CardTitle>
               </CardHeader>

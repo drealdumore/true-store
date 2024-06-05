@@ -31,8 +31,9 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="w-full h-full flex flex-col">
         <Navbar />
 
-        <div className="bg-gray-200 p-4 h-[calc(100vh-64px)] overflow-y-scroll">{children}</div>
-        {/* <div className="bg-gray-200 p-4 h-[calc(100vh-64px)]">{children}</div> */}
+        <div className="bg-muted/40 p-4 h-[calc(100vh-64px)] overflow-y-scroll">
+          {children}
+        </div>
       </div>
       {isLoading && <Loader />}
     </div>
