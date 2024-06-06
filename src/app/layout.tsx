@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "True Store",
   description:
-    "We produce butter soft, affordable, high quality fitted premium tees for men. Super versatile shirts that can be worn for any occasion including date nights, chilling at home or athletic activities.",
+    "Butter soft, affordable, high quality fitted premium tees for men. Super versatile shirts that can be worn for any occasion including date nights, chilling at home or athletic activities.",
 };
 
 export default function RootLayout({
