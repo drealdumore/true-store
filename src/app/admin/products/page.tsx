@@ -1,16 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+import axios from "axios";
 import {
   Table,
   TableHeader,
@@ -20,10 +11,29 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import Layout from "../Layout";
-import { useState, useMemo, SVGProps } from "react";
+import { useState, useMemo, SVGProps, useEffect } from "react";
 import { useSearch } from "@/context/searchContext";
+import { setLoading } from "@/redux/features/loadingSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 export default function Component() {
+  const [productss, setProducts] = useState([]);
+  const [openPopup, setOpenPopUp] = useState(false);
+  const [updateTable, setUpdateTable] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setLoading(true));
+
+    axios
+      .get("/api/get_products")
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => dispatch(setLoading(false)));
+      
+  }, [updateTable]);
+
   const products = [
     {
       id: 1,
