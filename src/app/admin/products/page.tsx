@@ -15,6 +15,8 @@ import { useState, useMemo, SVGProps, useEffect } from "react";
 import { useSearch } from "@/context/searchContext";
 import { setLoading } from "@/redux/features/loadingSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import ProductRow from "@/components/admin/ProductRow";
+import Popup from "@/components/admin/Popup";
 
 export default function Component() {
   const [productss, setProducts] = useState([]);
@@ -23,16 +25,15 @@ export default function Component() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(setLoading(true));
+  // useEffect(() => {
+  //   dispatch(setLoading(true));
 
-    axios
-      .get("/api/get_products")
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => dispatch(setLoading(false)));
-      
-  }, [updateTable]);
+  //   axios
+  //     .get("/api/get_products")
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.log(err))
+  //     .finally(() => dispatch(setLoading(false)));
+  // }, [updateTable]);
 
   const products = [
     {
@@ -41,6 +42,8 @@ export default function Component() {
       description: "High-quality wireless headphones with noise cancellation",
       price: 99.99,
       stock: 50,
+
+      quantity: 7,
     },
     {
       id: 2,
@@ -48,6 +51,8 @@ export default function Component() {
       description: "Comfortable and adjustable office chair for long hours",
       price: 249.99,
       stock: 20,
+
+      quantity: 7,
     },
     {
       id: 3,
@@ -55,6 +60,8 @@ export default function Component() {
       description: "Tactile and responsive mechanical keyboard for gaming",
       price: 79.99,
       stock: 30,
+
+      quantity: 7,
     },
     {
       id: 4,
@@ -62,6 +69,8 @@ export default function Component() {
       description: "4K Ultra HD smart TV with built-in streaming apps",
       price: 499.99,
       stock: 15,
+
+      quantity: 7,
     },
     {
       id: 5,
@@ -69,6 +78,8 @@ export default function Component() {
       description: "Advanced fitness tracker with heart rate monitoring",
       price: 59.99,
       stock: 40,
+
+      quantity: 7,
     },
   ];
 
@@ -79,6 +90,16 @@ export default function Component() {
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [products, searchTerm]);
+
+  interface IProduct {
+    id: string;
+    name: string;
+    img: string;
+    price: number;
+    description: string;
+    quantity: number;
+    stock: number;
+  }
 
   return (
     <Layout>
@@ -95,6 +116,7 @@ export default function Component() {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead>Image</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Description</TableHead>
                   <TableHead>Price</TableHead>
@@ -103,75 +125,24 @@ export default function Component() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredProducts.map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell className="font-medium">
-                      {product.name}
-                    </TableCell>
-                    <TableCell>{product.description}</TableCell>
-                    <TableCell>${product.price.toFixed(2)}</TableCell>
-                    <TableCell>{product.stock} in stock</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Button variant="outline" size="icon">
-                          <FilePenIcon className="h-4 w-4" />
-                          <span className="sr-only">Edit</span>
-                        </Button>
-                        <Button variant="outline" size="icon">
-                          <TrashIcon className="h-4 w-4" />
-                          <span className="sr-only">Delete</span>
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
+                {products.map((product, index) => (
+                  // {productss.map((product: IProduct, index) => (
+                  <ProductRow
+                    key={product.id}
+                    srNo={index + 1}
+                    setOpenPopUp={setOpenPopUp}
+                    setUpdateTable={setUpdateTable}
+                    product={product}
+                  />
                 ))}
               </TableBody>
             </Table>
           </div>
         </main>
       </div>
+      {openPopup && (
+        <Popup setOpenPopup={setOpenPopUp} setUpdatetable={setUpdateTable} />
+      )}
     </Layout>
-  );
-}
-
-function FilePenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v10" />
-      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-      <path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4Z" />
-    </svg>
-  );
-}
-
-function TrashIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 6h18" />
-      <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-      <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-    </svg>
   );
 }

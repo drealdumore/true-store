@@ -2,18 +2,22 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface IProduct {
   id: string;
-  title: string;
+  name: string;
   img: string;
   price: number;
+  description: string;
   quantity: number;
+  stock: number;
 }
 
 const initialState: IProduct = {
   id: "",
-  title: "",
+  name: "",
   img: "",
   price: 0,
   quantity: 0,
+  description: "",
+  stock: 0,
 };
 
 export const productSlice = createSlice({
