@@ -16,7 +16,6 @@ import React, { Dispatch, SVGProps, SetStateAction } from "react";
 interface IProduct {
   id: string;
   name: string;
-  img: string;
   price: number;
   description: string;
   quantity: number;
@@ -44,8 +43,7 @@ const ProductRow = ({
   };
 
   const onDelete = () => {
-    console.log('zonDelete');
-    
+    console.log("zonDelete");
   };
 
   return (

@@ -116,7 +116,6 @@ export default function Component() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Image</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Description</TableHead>
                   <TableHead>Price</TableHead>
@@ -125,8 +124,7 @@ export default function Component() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {products.map((product, index) => (
-                  // {productss.map((product: IProduct, index) => (
+                {filteredProducts.map((product, index) => (
                   <ProductRow
                     key={product.id}
                     srNo={index + 1}

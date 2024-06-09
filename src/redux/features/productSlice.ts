@@ -3,7 +3,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 interface IProduct {
   id: string;
   name: string;
-  img: string;
   price: number;
   description: string;
   quantity: number;
@@ -13,7 +12,6 @@ interface IProduct {
 const initialState: IProduct = {
   id: "",
   name: "",
-  img: "",
   price: 0,
   quantity: 0,
   description: "",
