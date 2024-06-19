@@ -1,9 +1,20 @@
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/admin/authProvider";
 import App from "./App";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/client/Navbar";
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +30,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      {/* <body> */}
-      <body className={inter.className}>
-        <AuthProvider>
-          <App>{children}</App>
-        </AuthProvider>
+    <ClerkProvider>
+      <html lang="en">
+        {/* <body> */}
+        <body className={inter.className}>
+          <AuthProvider>
+            <Navbar />
+            <App>{children}</App>
+          </AuthProvider>
 
-        <Toaster position="bottom-center" reverseOrder={false} />
-      </body>
-    </html>
+          <Toaster position="bottom-center" reverseOrder={false} />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
