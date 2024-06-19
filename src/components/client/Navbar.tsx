@@ -2,8 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { JSX, SVGProps } from "react";
+import { auth } from "@clerk/nextjs/server";
+import { UserButton } from "@clerk/nextjs";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const { userId } = auth();
+
   return (
     <header className="bg-white dark:bg-gray-950 shadow-sm">
       <div className="container px-4 md:px-6 flex items-center justify-between py-4">
@@ -35,22 +39,29 @@ const Navbar = () => {
             <UserIcon className="h-6 w-6" />
             <span className="sr-only">Profile</span>
           </Link>
-          <nav className="flex items-center space-x-6">
-            <Link
-              href="#"
-              className="text-sm font-medium hover:underline underline-offset-4"
-              prefetch={false}
-            >
-              Sign In
-            </Link>
-            <Link
-              href="#"
-              className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-white shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-950 disabled:pointer-events-none disabled:opacity-50"
-              prefetch={false}
-            >
-              Sign Up
-            </Link>
-          </nav>
+
+          {userId ? (
+            <div>
+              <UserButton afterSignOutUrl='/' />
+            </div>
+          ) : (
+            <nav className="flex items-center space-x-6">
+              <Link
+                href="#"
+                className="text-sm font-medium hover:underline underline-offset-4"
+                prefetch={false}
+              >
+                Sign In
+              </Link>
+              <Link
+                href="#"
+                className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-white shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-950 disabled:pointer-events-none disabled:opacity-50"
+                prefetch={false}
+              >
+                Sign Up
+              </Link>
+            </nav>
+          )}
         </div>
       </div>
     </header>

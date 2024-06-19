@@ -1,13 +1,31 @@
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { JSX, SVGProps } from "react";
-import { UserButton } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = auth();
+  console.log(userId);
+  let user;
+
+  try {
+    // Get the Backend API User object when you need access to the user's information
+    user = await currentUser();
+    // console.log(user);
+  } catch (error) {
+    console.error("Failed to fetch current user:", error);
+    return (
+      <div>
+        <h1>Error occurred while fetching user data</h1>
+        <p>Please try again later.</p>
+      </div>
+    );
+  }
+
+  if (!userId || !user) {
+    return <div>you are not logged in</div>;
+  }
+
   return (
     <div>
-      <UserButton/>
-      
       <section className="w-full h-[500px] relative overflow-hidden">
         <img
           src="/placeholder.svg"
