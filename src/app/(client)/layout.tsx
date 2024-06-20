@@ -8,7 +8,6 @@ import {
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import App from "../App";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/client/Navbar";
