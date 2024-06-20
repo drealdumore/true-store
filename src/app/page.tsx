@@ -3,13 +3,10 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 
 export default async function Home() {
   const { userId } = auth();
-  console.log(userId);
   let user;
 
   try {
-    // Get the Backend API User object when you need access to the user's information
     user = await currentUser();
-    // console.log(user);
   } catch (error) {
     console.error("Failed to fetch current user:", error);
     return (

@@ -50,7 +50,7 @@ export default function Component() {
                 <CardHeader>
                   <CardTitle>Store Details</CardTitle>
                   <CardDescription>
-                    Update your store's name, description, and logo.
+                    Update your store&#39;s name, description, and logo.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4">

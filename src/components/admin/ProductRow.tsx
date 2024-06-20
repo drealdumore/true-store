@@ -1,5 +1,3 @@
-import { setProduct } from "@/redux/features/productSlice";
-import { useAppDispatch } from "@/redux/hooks";
 import {
   Table,
   TableHeader,
@@ -14,7 +12,7 @@ import Image from "next/image";
 import React, { Dispatch, SVGProps, SetStateAction } from "react";
 
 interface IProduct {
-  id: string;
+  id: number;
   name: string;
   price: number;
   description: string;
@@ -26,7 +24,7 @@ interface PropsType {
   srNo: number;
   setOpenPopUp: Dispatch<SetStateAction<boolean>>;
   setUpdateTable: Dispatch<SetStateAction<boolean>>;
-  product: IProduct;
+  product: IProduct | any;
 }
 
 const ProductRow = ({
@@ -35,15 +33,12 @@ const ProductRow = ({
   setUpdateTable,
   product,
 }: PropsType) => {
-  const dispatch = useAppDispatch();
-
   const onEdit = () => {
-    dispatch(setProduct(product));
     setOpenPopUp(true);
   };
 
   const onDelete = () => {
-    console.log("zonDelete");
+    console.log("onDelete");
   };
 
   return (

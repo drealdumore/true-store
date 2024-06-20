@@ -5,13 +5,23 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import type { Metadata } from "next";
-import "../globals.css";
 
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import AuthProvider from "@/components/admin/authProvider";
+import App from "./src/app/App";
+import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/client/Navbar";
+
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "True Store - Authentication",
-  description: "Authentication for True Store",
+  title: "True Store",
+  description:
+    "Butter soft, affordable, high quality fitted premium tees for men. Super versatile shirts that can be worn for any occasion including date nights, chilling at home or athletic activities.",
 };
 
 export default function RootLayout({
@@ -22,16 +32,59 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          {children}
+        {/* <body> */}
+        <body className={inter.className}>
+          <Navbar />
+          <App>{children}</App>
+
+          <Toaster position="bottom-center" reverseOrder={false} />
         </body>
       </html>
     </ClerkProvider>
   );
 }
+// import {
+//   ClerkProvider,
+//   SignInButton,
+//   SignedIn,
+//   SignedOut,
+//   UserButton,
+// } from "@clerk/nextjs";
+
+// import type { Metadata } from "next";
+// import { Inter } from "next/font/google";
+// import "./globals.css";
+// import AuthProvider from "@/components/admin/authProvider";
+// import App from "./App";
+// import { Toaster } from "react-hot-toast";
+// import Navbar from "@/components/client/Navbar";
+
+// import "./globals.css";
+
+// const inter = Inter({ subsets: ["latin"] });
+
+// export const metadata: Metadata = {
+//   title: "True Store",
+//   description:
+//     "Butter soft, affordable, high quality fitted premium tees for men. Super versatile shirts that can be worn for any occasion including date nights, chilling at home or athletic activities.",
+// };
+
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <ClerkProvider>
+//       <html lang="en">
+//         {/* <body> */}
+//         <body className={inter.className}>
+//           <Navbar />
+//           <App>{children}</App>
+
+//           <Toaster position="bottom-center" reverseOrder={false} />
+//         </body>
+//       </html>
+//     </ClerkProvider>
+//   );
+// }

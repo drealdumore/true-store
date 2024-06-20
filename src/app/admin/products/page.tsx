@@ -13,17 +13,22 @@ import {
 import Layout from "../Layout";
 import { useState, useMemo, SVGProps, useEffect } from "react";
 import { useSearch } from "@/context/searchContext";
-import { setLoading } from "@/redux/features/loadingSlice";
-import { useAppDispatch } from "@/redux/hooks";
 import ProductRow from "@/components/admin/ProductRow";
 import Popup from "@/components/admin/Popup";
+
+interface IProduct {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  quantity: number;
+  stock: number;
+}
 
 export default function Component() {
   const [productss, setProducts] = useState([]);
   const [openPopup, setOpenPopUp] = useState(false);
   const [updateTable, setUpdateTable] = useState(false);
-
-  const dispatch = useAppDispatch();
 
   // useEffect(() => {
   //   dispatch(setLoading(true));

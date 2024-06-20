@@ -4,7 +4,6 @@ import Loader from "@/components/admin/Loader";
 import LoginPage from "@/components/admin/Login";
 import Navbar from "@/components/admin/Navbar";
 import Sidebar from "@/components/admin/Sidebar";
-import { useAppSelector } from "@/redux/hooks";
 import { useSession } from "next-auth/react";
 import React, { ReactNode, useEffect } from "react";
 
@@ -13,16 +12,9 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const isLoading = useAppSelector((store) => store.loadingReducer);
-  const { data: session } = useSession();
-
   // useEffect(() => {
   //   console.log("Redux loading state:", isLoading);
   // }, [isLoading]);
-
-  // if (!session?.user) {
-  //   return <LoginPage />;
-  // }
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -35,7 +27,6 @@ const Layout = ({ children }: LayoutProps) => {
           {children}
         </div>
       </div>
-      {isLoading && <Loader />}
     </div>
   );
 };
