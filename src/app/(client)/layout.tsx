@@ -13,7 +13,7 @@ import App from "../App";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/client/Navbar";
 
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

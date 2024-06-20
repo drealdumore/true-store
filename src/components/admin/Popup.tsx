@@ -12,8 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-import { setLoading } from "@/redux/features/loadingSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { makeToast } from "@/utils/helper";
 import axios from "axios";
 import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
@@ -24,30 +22,28 @@ interface PropsType {
 }
 
 const Popup = ({ setOpenPopup, setUpdatetable }: PropsType) => {
-  const productData = useAppSelector((state) => state.productReducer);
-  const dispatch = useAppDispatch();
 
   const [inputData, setInputData] = useState({
-    name: productData.name,
+    name: 'nsme of product',
     category: "men",
-    price: productData.price,
+    price: 5000
   });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
 
-    axios
-      .put(`/api/edit_product/${productData.id}`, inputData)
-      .then((res) => {
-        makeToast("Product updated successfully!!");
-        setUpdatetable((prevState) => !prevState);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setLoading(false);
-        setOpenPopup(false);
-      });
+    // axios
+    //   .put(`/api/edit_product/${productData.id}`, inputData)
+    //   .then((res) => {
+    //     makeToast("Product updated successfully!!");
+    //     setUpdatetable((prevState) => !prevState);
+    //   })
+    //   .catch((err) => console.log(err))
+    //   .finally(() => {
+    //     setLoading(false);
+    //     setOpenPopup(false);
+    //   });
   };
 
   return (
